@@ -42,7 +42,6 @@ char *arithmatoy_add(unsigned int base, const char *lhs, const char *rhs) {
     int Size2 = strlen(rhs);
     int size_max = (size2 > Size2) ? size2 : Size2;
 
-    // Allouer de la mémoire pour la chaîne de caractères résultante
     char* Result = (char*)malloc((size_max + 2) * sizeof(char));
     if (Result == NULL) {
         printf("Erreur d'allocation de mémoire.\n");
@@ -52,7 +51,7 @@ char *arithmatoy_add(unsigned int base, const char *lhs, const char *rhs) {
     int SizeResult = 0;
     int retention = 0;
 
-    // Additionner les Figures des deux Values
+    // petite for pour additionner les deux valeurs
     for (int i = 0; i < size_max; i++) {
         int sum = retention;
 
@@ -97,9 +96,7 @@ char *arithmatoy_add(unsigned int base, const char *lhs, const char *rhs) {
     }
 
     return Result;
-  // Fill the function, the goal is to compute lhs + rhs
-  // You should allocate a new char* large enough to store the result as a
-  // string Implement the algorithm Return the result
+    
 }
 
 char *arithmatoy_sub(unsigned int base, const char *lhs, const char *rhs) {
@@ -120,7 +117,7 @@ char *arithmatoy_sub(unsigned int base, const char *lhs, const char *rhs) {
     int SizeResult = 0;
     int retention = 0;
 
-    // Soustraire les Figures des deux Values
+    // Soustraction des deux chiffres des valeurs
     for (int i = 0; i < size_max; i++) {
         int difference = retention;
 
@@ -142,26 +139,23 @@ char *arithmatoy_sub(unsigned int base, const char *lhs, const char *rhs) {
         SizeResult++;
     }
 
-    // Supprimer les zéros non significatifs en tête de la chaîne de caractères
+    // se débarasser des zero non significatifs 
     int index = 0;
     while (Result[index] == '0' && index < SizeResult - 1) {
         index++;
     }
 
-    // Décaler la chaîne de caractères pour enlever les zéros non significatifs
+    // Décaler la chaîne de caractères
     for (int i = index; i < SizeResult; i++) {
         Result[i - index] = Result[i];
     }
 
     SizeResult -= index;
 
-    // Terminer la chaîne avec un caractère nul
+    // le fameux
     Result[SizeResult] = '\0';
 
     return Result;
-  // Fill the function, the goal is to compute lhs - rhs (assuming lhs > rhs)
-  // You should allocate a new char* large enough to store the result as a
-  // string Implement the algorithm Return the result
 }
 
 char *arithmatoy_mul(unsigned int base, const char *lhs, const char *rhs) {
@@ -172,20 +166,20 @@ char *arithmatoy_mul(unsigned int base, const char *lhs, const char *rhs) {
   int size2 = strlen(lhs);
     int Size2 = strlen(rhs);
 
-    // Allouer de la mémoire pour la chaîne de caractères résultante
+    // Allocation de memoire pour la chaine qui sort
     char* Result = (char*)malloc((size2 + Size2 + 1) * sizeof(char));
     if (Result == NULL) {
         printf("Erreur d'allocation de mémoire.\n");
         exit(1);
     }
 
-    // Initialiser le résultat à zéro
+    
     for (int i = 0; i < size2 + Size2; i++) {
         Result[i] = '0';
     }
     Result[size2 + Size2] = '\0';
 
-    // Effectuer la multiplication
+    // for pour la multiplication 
     for (int i = 0; i < size2; i++) {
         int Figure1 = ValueFigure(lhs[size2 - 1 - i], base);
         int retention = 0;
@@ -198,7 +192,7 @@ char *arithmatoy_mul(unsigned int base, const char *lhs, const char *rhs) {
             retention = product / base;
         }
 
-        // Ajouter la retention supplémentaire si nécessaire
+        // Ajouter la retenue
         int index = i + Size2;
         while (retention > 0) {
             int sum = retention + ValueFigure(Result[index], base);
@@ -208,7 +202,7 @@ char *arithmatoy_mul(unsigned int base, const char *lhs, const char *rhs) {
         }
     }
 
-    // Inverser la chaîne de caractères résultante
+    // Inverser la chaîne
     int SizeResult = strlen(Result);
     for (int i = 0; i < SizeResult / 2; i++) {
         char temp = Result[i];
@@ -231,9 +225,7 @@ char *arithmatoy_mul(unsigned int base, const char *lhs, const char *rhs) {
     string[index]='\0';
     if (strlen(string)==0){return "0";}
     return string;
-  // Fill the function, the goal is to compute lhs * rhs
-  // You should allocate a new char* large enough to store the result as a
-  // string Implement the algorithm Return the result
+  
 }
 
 // Here are some utility functions that might be helpful to implement add, sub
@@ -260,8 +252,7 @@ char to_digit(unsigned int value) {
 }
 
 char *reverse(char *str) {
-  // Reverse a string in place, return the pointer for convenience
-  // Might be helpful if you fill your char* buffer from left to right
+
   const size_t length = strlen(str);
   const size_t bound = length / 2;
   for (size_t i = 0; i < bound; ++i) {
@@ -289,7 +280,7 @@ const char *drop_leading_zeros(const char *number) {
 }
 
 void debug_abort(const char *debug_msg) {
-  // Print a message and exit
+  // Printdebug et finir
   fprintf(stderr, debug_msg);
   exit(EXIT_FAILURE);
 }
